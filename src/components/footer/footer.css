@@ -1,0 +1,18 @@
+.footer {
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  padding: 0.5rem;
+  position: relative;
+  width: inherit;
+  margin-top: auto;
+}
+
+h4 {
+  padding: 0.1rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+a {
+  color: rgb(254, 254, 254);
+}
