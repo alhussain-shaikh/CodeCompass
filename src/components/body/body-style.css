@@ -1,0 +1,77 @@
+.parent-div {
+  width: 45%;
+  height: 8rem;
+  display: block;
+  margin: 3rem auto 3rem auto;
+  /* background-color: rgb(0,0,0,0.75); */
+  border-radius: 10px;
+  text-align: center;
+}
+
+#su-title {
+  padding: 1rem 0 0.5rem 0;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: #7e0d80;
+}
+
+#su-input {
+  width: 60%;
+  height: 30%;
+  padding: 0.4rem;
+  margin: 0 1rem 0;
+  background-color:  rgb(255,255,255,0.9);
+  border: 5px solid ;
+  border-radius: 10px;
+  font-size: medium;
+  text-indent: 0.5rem;
+  color: rgb(0,0,0,0.75)
+}
+
+.search {
+  color: white;
+  font-size: medium;
+  font-weight: bold;
+  background-color: blueviolet;
+  height: 30%;
+  padding: 0.5rem;
+  border: 0;
+  border-radius: 5px;
+}
+
+.search:hover {
+  color: black;
+  background-color: lavender;
+  transform: scale(1.1);
+  border: 1px solid black;
+}
+
+.errormsg {
+  background-color: rgb(0,0,0,0.8);
+  width: 50%;
+  height: 5rem;
+  margin: auto;
+  border-radius: 10px;
+  color: red;
+  padding: 1rem;
+}
+
+.Initial {
+  width: 45%;
+  /* background-color: rgb(0,0,0,0.8); */
+  color: lavender;
+  margin: auto;
+  border-radius: 10px;
+}
+.ErrState {
+  width: 45%;
+  /* background-color: rgb(0,0,0,0.8); */
+  color: lavender;
+  margin: auto;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+}
+.ErrState h2 {
+  margin: 0;
+  color: orange;
+}
