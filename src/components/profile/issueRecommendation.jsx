@@ -7,7 +7,7 @@ function GitHubIssueFetcher() {
   const [numIssues, setNumIssues] = useState(0);
   const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
-  const githubToken = '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';
+  const githubToken = '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';
 
   const fetchGitHubIssues = async () => {
     try {
