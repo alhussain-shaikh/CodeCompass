@@ -2,6 +2,7 @@ import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
 import { ProjectCard } from "./ProjectCard";
 import GitHubIssueFetcher from './profile/issueRecommendation';
 import CompareRepo from './profile/compareRepo';
+import RepoRecommend from "./RepoRecommend";
 import projImg1 from "../assets/img/project-img1.png";
 import projImg2 from "../assets/img/project-img2.png";
 import projImg3 from "../assets/img/project-img3.png";
@@ -69,7 +70,7 @@ export const Projects = () => {
                   <Tab.Content id="slideInUp" className={isVisible ? "animate__animated animate__slideInUp" : ""}>
                     <Tab.Pane eventKey="first">
                       <Row>
-                        {
+                        {/* {
                           projects.map((project, index) => {
                             return (
                               <ProjectCard
@@ -78,7 +79,8 @@ export const Projects = () => {
                                 />
                             )
                           })
-                        }
+                        } */}
+                        <RepoRecommend />
                       </Row>
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
