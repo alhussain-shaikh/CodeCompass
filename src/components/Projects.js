@@ -1,5 +1,7 @@
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
 import { ProjectCard } from "./ProjectCard";
+import GitHubIssueFetcher from './profile/issueRecommendation';
+import CompareRepo from './profile/compareRepo';
 import projImg1 from "../assets/img/project-img1.png";
 import projImg2 from "../assets/img/project-img2.png";
 import projImg3 from "../assets/img/project-img3.png";
@@ -79,11 +81,13 @@ export const Projects = () => {
                         }
                       </Row>
                     </Tab.Pane>
-                    <Tab.Pane eventKey="section">
+                    <Tab.Pane eventKey="second">
                       <p>Open source projects are collaborative software initiatives where developers from around the world contribute and improve code openly. These projects encourage transparency, innovation, and community-driven development, fostering a vibrant ecosystem of shared knowledge and resources.</p>
+                      <CompareRepo/>
                     </Tab.Pane>
                     <Tab.Pane eventKey="third">
                       <p>Open source projects are collaborative software initiatives where developers from around the world contribute and improve code openly. These projects encourage transparency, innovation, and community-driven development, fostering a vibrant ecosystem of shared knowledge and resources.</p>
+                       <GitHubIssueFetcher/>
                     </Tab.Pane>
                   </Tab.Content>
                 </Tab.Container>

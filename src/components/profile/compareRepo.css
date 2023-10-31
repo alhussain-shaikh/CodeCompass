@@ -1,0 +1,99 @@
+.recommed-section {
+    background-color: rgb(255, 255, 255);
+    color: white;
+    width: 85%;
+    text-align: center;
+    margin: auto;
+    border-radius: 10px;
+    padding: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 5px 5px grey
+  }
+  
+  .recommed-info-title {
+    background:  darkviolet;
+    border-radius: 5px;
+    width: 100%;
+    margin: auto;
+  } h2 {
+    padding: 0.2rem;
+  }
+  .text-area {
+    background-color: rgb(216, 191, 216,0.4);
+    padding: 0.5rem;
+    width: 85%;
+    margin: auto;
+    border-radius: 10px;
+  }
+  label{
+    color: black;
+    text-emphasis-style: bold;
+  
+  }
+  ul{
+    text-align: start;
+    color: black;
+  }
+  .rec{
+    text-align: left;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    font-weight: 500;
+    border-radius: 5px;
+    
+  }
+  .rec button{
+    align-items: flex-end;
+    margin-left: end;
+    
+  }
+  .search {
+    color: white;
+    font-size: medium;
+    font-weight: bold;
+    background-color: blueviolet;
+    height: 30%;
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 5px;
+    align-items: right;
+  }
+  
+  .search:hover {
+    color: black;
+    background-color: lavender;
+    transform: scale(1.1);
+    border: 1px solid black;
+  }
+  .searchinput {
+    width: 60%;
+    height: 30%;
+    padding: 0.4rem;
+    margin: 0 4rem 0;
+    background-color:  rgb(255,255,255,0.9);
+    border: 5px solid ;
+    border-radius: 10px;
+    font-size: medium;
+    text-indent: 0.5rem;
+    color: rgb(0,0,0,0.75)
+  }
+  .searchin {
+    width: 40%;
+    height: 30%;
+    padding: 0.4rem;
+    margin: 0 4rem ;
+    margin-bottom: 1rem;
+    background-color:  rgb(255,255,255,0.9);
+    border: 2px solid ;
+    border-radius: 10px;
+    font-size: medium;
+    text-indent: 0.5rem;
+    flex-wrap: nowrap;
+    color: rgb(0,0,0,0.75)
+    
+  }
+  h3{
+    color:black;
+  }
+  h5{
+    color: green;
+  }
