@@ -1,3 +1,154 @@
-button{
-    color: white;
+/* issueRecommendation.css */
+
+::-webkit-scrollbar {
+    width: 10px;
 }
+
+::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 10px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    /* Align text to the left */
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    /* Full width input */
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: left;
+    /* Align text to the left */
+    margin-left: 0;
+    /* Add left margin */
+}
+
+button {
+    background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
+    color: #000000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.7s, color 0.3s;
+    /* Add transition effect */
+}
+
+button:hover {
+    background: black;
+    color: #fff;
+    /* Font color turns white */
+    background-position: 100% 0;
+    /* Slide background in from the left */
+}
+
+.outputContainer {
+    display: flex;
+    /* Make outputs horizontal */
+    overflow: auto !important;
+    /* Enable horizontal scrolling */
+    margin-top: 10px;
+    width: 1200px;
+    /* margin-left: 550px; */
+    /* white-space: wrap; */
+}
+
+.issueOutput {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    margin: 10px;
+    max-height: 350px;
+    min-width: 280px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+
+
+.cardHeader {
+    background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
+    color: #fff;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 150px;
+    overflow-y: auto;
+}
+
+
+
+.RepositoryURL {
+    margin-left: 10px;
+    text-align: left;
+    font-weight: bold;
+    font-size: larger;
+    text-decoration: none !important;
+}
+
+.owner {
+    margin-left: 10px;
+    text-align: left;
+    font-weight: bold;
+    font-size: medium;
+    text-decoration: none !important;
+}
+
+.title {
+    color: #000000 !important;
+    font-size: medium;
+}
+
+.issueDescription {
+    display: flex;
+    flex-direction: column;
+    overflow-x: visible;
+
+}
+
+
+/* Hide the scrollbar */
+::-webkit-scrollbar {
+    display: none;
+}
+
+.profilePic {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-bottom: 3px;
+}
+
+.project p {
+    color: #B8B8B8;
+    font-size: 18px;
+    letter-spacing: 0.8px;
+    line-height: 1.5em;
+    margin: 6px 11px 2px 11px;
+    min-width: fit-content;
+    /* overflow-wrap: normal;    */
+}
+
+/* .card {
+
+    overflow-x: auto;
+} */
