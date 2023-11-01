@@ -22,6 +22,7 @@ const RepoRecommend = () => {
   const [username, setUsername] = useState("");
   const [contributedData, setContributedData] = useState([]);
   const [toggle, setToggle] = useState(false);
+  const [recommendedRepos, setRecommendedRespos] = useState([]);
 
   let uniqueRequests = [];
   let uniqueRepos = [];
@@ -30,18 +31,35 @@ const RepoRecommend = () => {
   const config = {
     headers: {
       Authorization: `Bearer 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`,
+
     },
   };
 
   const recommendRepos = () => {
-    setToggle(true);
+    // setToggle(true);
+
+    uniqueRepos = uniqueRepos.slice(1);
+
+    const bodyData = {
+      ur: uniqueRepos,
+      ui: uniqueInterested,
+      up: uniqueRequests,
+    };
+    axios
+      .post("http://localhost:5000/api/similarity", bodyData)
+      .then((res) => {
+        setRecommendedRespos(res.data.recommended_repos)
+        console.log("Successful--------",res.data.recommended_repos)
+      }
+      )
+      .catch((e) => console.log(e));
   };
 
   const fetchContributions = async () => {
     const allEvents = [];
     let page = 1;
 
-    while (allEvents.length < 90) {
+    while (allEvents.length < 30) {
       try {
         const response = await axios.get(
           `https://api.github.com/users/${username}/events?page=${page}`,
@@ -79,6 +97,7 @@ const RepoRecommend = () => {
           display: "flex",
           justifyContent: "center",
           color: "#6131AD"
+
         }}
       />
       <Typography
@@ -86,10 +105,15 @@ const RepoRecommend = () => {
         component="h4"
         sx={{ textAlign: "center", marginTop: "20px", color: "#6131AD" }}
       >
-        {username} Past Contributions <FiSearch size={20} onClick={fetchContributions} />{" "}
+        {username} Past Contributions{" "}
+        <FiSearch size={20} onClick={fetchContributions} />{" "}
       </Typography>
       <br />
-      <Typography variant="h5" component="h4" sx={{ textAlign: "center", marginTop: "20px" }}>
+      <Typography
+        variant="h5"
+        component="h4"
+        sx={{ textAlign: "center", marginTop: "20px" }}
+      >
         Based on Pull Requests
       </Typography>
       <br />
@@ -103,12 +127,21 @@ const RepoRecommend = () => {
             return (
               <Card
                 key={index}
-                style={{ minWidth: 350, margin: 10, borderRadius: 15, background: "#fff" }}
+
+                style={{
+                  minWidth: 350,
+                  margin: 10,
+                  borderRadius: 15,
+                  background: "#fff",
+                }}
+
               >
                 <CardContent>
                   <Typography variant="h5" component="div">
                     {contribution.repo.name}
-                    {!uniqueRepos.includes(contribution.repo.name) ? uniqueRepos.push(contribution.repo.name) : null}
+                    {!uniqueRepos.includes(contribution.repo.name)
+                      ? uniqueRepos.push(contribution.repo.name)
+                      : null}
                   </Typography>
                   <Typography color="textSecondary" gutterBottom>
                     {contribution.payload.pull_request.title}{" "}
@@ -128,7 +161,11 @@ const RepoRecommend = () => {
       </div>
 
       <br />
-      <Typography variant="h5" component="h4" sx={{ textAlign: "center", marginTop: "20px" }}>
+      <Typography
+        variant="h5"
+        component="h4"
+        sx={{ textAlign: "center", marginTop: "20px" }}
+      >
         Based on Comments
       </Typography>
       <br />
@@ -142,11 +179,16 @@ const RepoRecommend = () => {
           ) {
             uniqueInterested.push(contribution.payload.issue.title);
             return (
+
               <Card key={index} style={{ minWidth: 300, margin: 10, borderRadius: 15, background: "#fff" }}>
                 <CardContent>
                   <Typography variant="h5" component="div" style={{ color: "#7E0D80" }}>
+
+
                     {contribution.repo.name}
-                    {!uniqueRepos.includes(contribution.repo.name) ? uniqueRepos.push(contribution.repo.name) : null}
+                    {!uniqueRepos.includes(contribution.repo.name)
+                      ? uniqueRepos.push(contribution.repo.name)
+                      : null}
                   </Typography>
                   <Typography color="textSecondary" gutterBottom>
                     {contribution.payload.issue.title}{" "}
@@ -172,8 +214,44 @@ const RepoRecommend = () => {
           Recommend
         </Button>
       </div>
-      <br /><br />
-      {toggle ? <>{/* Your recommendation component */}</> : <></>}
+
+      <br />
+      <br />
+
+      <div style={{ display: "flex", overflowX: "auto" }}>
+        {recommendedRepos.length > 0 && recommendedRepos.map((issue, index) => {
+          return (
+            <Card
+              key={index}
+              style={{
+                minWidth: 300,
+                margin: 10,
+                borderRadius: 15,
+                background: "#fff",
+              }}
+            >
+              <CardContent>
+                <Typography
+                  variant="h5"
+                  component="div"
+                  style={{ color: "#7E0D80" }}
+                >
+                  {issue.repo}
+                </Typography>
+                <Typography color="textSecondary" gutterBottom>
+                  {issue.issue}{" "}
+                  <div style={containerStyle}>
+                    <Button variant="contained" color="primary">
+                    <a href={issue.url}> <BsArrowRightCircle /></a>
+                    </Button>
+                  </div>
+                </Typography>
+              </CardContent>
+            </Card>
+          );
+        })}
+        ;
+      </div>
     </Card>
   );
 };
