@@ -30,7 +30,8 @@ const RepoRecommend = () => {
 
   const config = {
     headers: {
-      Authorization: `Bearer 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`,
+      Authorization: `Bearer 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`,
+
     },
   };
 
@@ -95,7 +96,8 @@ const RepoRecommend = () => {
           width: "300px",
           display: "flex",
           justifyContent: "center",
-          color: "#6131AD",
+          color: "#6131AD"
+
         }}
       />
       <Typography
@@ -125,12 +127,14 @@ const RepoRecommend = () => {
             return (
               <Card
                 key={index}
+
                 style={{
                   minWidth: 350,
                   margin: 10,
                   borderRadius: 15,
                   background: "#fff",
                 }}
+
               >
                 <CardContent>
                   <Typography variant="h5" component="div">
@@ -175,21 +179,12 @@ const RepoRecommend = () => {
           ) {
             uniqueInterested.push(contribution.payload.issue.title);
             return (
-              <Card
-                key={index}
-                style={{
-                  minWidth: 300,
-                  margin: 10,
-                  borderRadius: 15,
-                  background: "#fff",
-                }}
-              >
+
+              <Card key={index} style={{ minWidth: 300, margin: 10, borderRadius: 15, background: "#fff" }}>
                 <CardContent>
-                  <Typography
-                    variant="h5"
-                    component="div"
-                    style={{ color: "#7E0D80" }}
-                  >
+                  <Typography variant="h5" component="div" style={{ color: "#7E0D80" }}>
+
+
                     {contribution.repo.name}
                     {!uniqueRepos.includes(contribution.repo.name)
                       ? uniqueRepos.push(contribution.repo.name)

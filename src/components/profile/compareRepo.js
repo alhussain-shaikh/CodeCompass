@@ -14,7 +14,7 @@ function CompareRepo() {
   const [skill, setSkill] = useState('');
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(false);
-  const githubToken = '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';
+  const githubToken = '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';
 
   const getRecommendations = async () => {
     setLoading(true);
