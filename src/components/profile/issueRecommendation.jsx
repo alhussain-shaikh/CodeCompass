@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './issueRecommendation.css';
+import { useSelector } from 'react-redux';
 
 function GitHubIssueFetcher() {
   const [issueTypes, setIssueTypes] = useState('');
@@ -9,7 +10,7 @@ function GitHubIssueFetcher() {
   const [loading, setLoading] = useState(false);
 
   const [toggle, setToggle] = useState(false);
-  const githubToken = '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';
+  const githubToken = useSelector((state)=>state.github.github_token)
   
   const fetchGitHubIssues = async () => {
     try {

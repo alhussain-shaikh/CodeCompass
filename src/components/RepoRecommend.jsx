@@ -25,7 +25,8 @@ const RepoRecommend = () => {
   const [toggle, setToggle] = useState(false);
   const [recommendedRepos, setRecommendedRespos] = useState([]);
 
-  const username = useSelector((state)=>state.username)
+  const username = useSelector((state)=>state.user.username)
+  const github_token = useSelector((state)=>state.github.github_token)
 
   let uniqueRequests = [];
   let uniqueRepos = [];
@@ -34,8 +35,7 @@ const RepoRecommend = () => {
   const config = {
     headers: {
  
-
-      Authorization: `Bearer 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`,
+      Authorization: `Bearer ${github_token}`,
 
     },
   };

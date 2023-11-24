@@ -29,7 +29,7 @@ export const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [user, setUser] = useState();
 
-  const username = useSelector((state) => state.username);
+  const username = useSelector((state) => state.user.username);
   console.log("username is : ",username);
 
   const storeUpdate = (e) =>{

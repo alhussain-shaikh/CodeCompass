@@ -120,7 +120,7 @@ function Body() {
       {prof}
       {profstat}
       {profaction}
-      {proRecommed}
+      {/* {proRecommed} */}
     </div>
   );
 }

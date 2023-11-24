@@ -1,6 +1,7 @@
 import "./compareRepo.css";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSelector } from "react-redux";
 // import { colorpallete } from "../validation/colors";
 
 function CompareRepo() {
@@ -16,8 +17,7 @@ function CompareRepo() {
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const githubToken = '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';
-
+  const githubToken = useSelector((state)=>state.github.github_token)
 
   const getRecommendations = async () => {
     setLoading(true);

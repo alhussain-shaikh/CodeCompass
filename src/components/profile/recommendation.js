@@ -11,7 +11,7 @@ function Recommendation(statdata) {
     return (
       <div className="recommed-section">
         <div className="recommed-info-title">
-          <h2>Recommendation Projects</h2>
+          {/* <h2>Recommendation Projects</h2> */}
         </div>
 
       </div>
