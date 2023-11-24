@@ -7,9 +7,10 @@ function GitHubIssueFetcher() {
   const [numIssues, setNumIssues] = useState(0);
   const [result, setResult] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [toggle, setToggle] = useState(false);
-  const githubToken = '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';
 
+  const [toggle, setToggle] = useState(false);
+  const githubToken = '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';
+  
   const fetchGitHubIssues = async () => {
     try {
       setLoading(true);
@@ -84,5 +85,4 @@ function GitHubIssueFetcher() {
     </div>
   );
 }
-
 export default GitHubIssueFetcher;

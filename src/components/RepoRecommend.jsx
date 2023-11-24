@@ -5,6 +5,7 @@ import { Card, CardContent, Typography, Button } from "@mui/material";
 import { FiSearch } from "react-icons/fi";
 import { BsArrowRightCircle } from "react-icons/bs";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const containerStyle = {
   display: "flex",
@@ -19,10 +20,12 @@ const bigContainerStyle = {
 };
 
 const RepoRecommend = () => {
-  const [username, setUsername] = useState("");
+  // const [username, setUsername] = useState("");
   const [contributedData, setContributedData] = useState([]);
   const [toggle, setToggle] = useState(false);
   const [recommendedRepos, setRecommendedRespos] = useState([]);
+
+  const username = useSelector((state)=>state.username)
 
   let uniqueRequests = [];
   let uniqueRepos = [];
@@ -31,7 +34,8 @@ const RepoRecommend = () => {
   const config = {
     headers: {
  
-      Authorization: `Bearer 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`,
+
+      Authorization: `Bearer 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`,
 
     },
   };
@@ -83,7 +87,7 @@ const RepoRecommend = () => {
 
   return (
     <Card style={bigContainerStyle}>
-      <TextField
+      {/* <TextField
         id="standard-basic"
         label="GitHub Username"
         variant="standard"
@@ -100,14 +104,15 @@ const RepoRecommend = () => {
           color: "#6131AD"
 
         }}
-      />
+      /> */}
       <Typography
         variant="h6"
         component="h4"
-        sx={{ textAlign: "center", marginTop: "20px", color: "#6131AD" }}
+        sx={{ textAlign: "center", marginTop: "20px", color: "#fff" }}
       >
         {username} Past Contributions{" "}
-        <FiSearch size={20} onClick={fetchContributions} />{" "}
+        <button onClick={fetchContributions}>Search</button>
+        {/* <FiSearch size={20} onClick={fetchContributions} />{" "} */}
       </Typography>
       <br />
       <Typography

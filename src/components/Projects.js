@@ -9,8 +9,11 @@ import projImg3 from "../assets/img/project-img3.png";
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
+import { useSelector } from 'react-redux';
 
 export const Projects = () => {
+
+  const username = useSelector((state) => state.username);
 
   const projects = [
     {
@@ -47,6 +50,8 @@ export const Projects = () => {
 
   return (
     <section className="project" id="project">
+     {username!="" ?
+     <>
       <Container>
         <Row>
           <Col size={12}>
@@ -55,6 +60,7 @@ export const Projects = () => {
               <div className={isVisible ? "animate__animated animate__fadeIn": ""}>
                 <h2>Projects</h2>
                 <p>Open source projects are collaborative software initiatives where developers from around the world contribute and improve code openly. These projects encourage transparency, innovation, and community-driven development, fostering a vibrant ecosystem of shared knowledge and resources.</p>
+                <br /><br />
                 <Tab.Container id="projects-tabs" defaultActiveKey="first">
                   <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
                     <Nav.Item>
@@ -81,14 +87,14 @@ export const Projects = () => {
                           })
                         } */}
                         <RepoRecommend />
-                      </Row>
+                      </Row>    
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
-                      <p>Open source projects are collaborative software initiatives where developers from around the world contribute and improve code openly. These projects encourage transparency, innovation, and community-driven development, fostering a vibrant ecosystem of shared knowledge and resources.</p>
+                      {/* <p>Open source projects are collaborative software initiatives where developers from around the world contribute and improve code openly. These projects encourage transparency, innovation, and community-driven development, fostering a vibrant ecosystem of shared knowledge and resources.</p> */}
                       <CompareRepo/>
                     </Tab.Pane>
                     <Tab.Pane eventKey="third">
-                      <p>Open source projects are collaborative software initiatives where developers from around the world contribute and improve code openly. These projects encourage transparency, innovation, and community-driven development, fostering a vibrant ecosystem of shared knowledge and resources.</p>
+                      {/* <p>Open source projects are collaborative software initiatives where developers from around the world contribute and improve code openly. These projects encourage transparency, innovation, and community-driven development, fostering a vibrant ecosystem of shared knowledge and resources.</p> */}
                        <GitHubIssueFetcher/>
                     </Tab.Pane>
                   </Tab.Content>
@@ -98,6 +104,11 @@ export const Projects = () => {
           </Col>
         </Row>
       </Container>
+      </> : 
+      <>
+
+      </>
+      }
       <img className="background-image-right" src={colorSharp2}></img>
     </section>
   )

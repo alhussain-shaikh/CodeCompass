@@ -8,13 +8,16 @@ function CompareRepo() {
   const [repo, setRepo] = useState('');
   const [projectUser, setProjectUser] = useState('');
   const [projectRepo,setProjectRepo]= useState('');
+  const [projectType,setProjectType]= useState('');
   const [userDependencies, setUserDependencies] = useState([]);
   const [projectDependencies, setProjectDependencies] = useState([]);
   const [cosineSimilarity, setCosineSimilarity] = useState(null);
   const [skill, setSkill] = useState('');
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(false);
-  const githubToken = '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';
+
+  const githubToken = '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';
+
 
   const getRecommendations = async () => {
     setLoading(true);
@@ -97,27 +100,77 @@ function CompareRepo() {
 
     return dependencies;
   };
+  const parseReactProject = (packagejsonContent) => {
+    const dependencies = [];
+    let parsingDependencies = false;
 
-  const fetchAndParseDependencies = async () => {
+    for (const line of packagejsonContent.split('\n')) {
+      const trimmedLine = line.trim();
+      if (trimmedLine.startsWith('"dependencies":') || trimmedLine.startsWith('"devDependencies":')) {
+        parsingDependencies = true;
+      } else if (
+        trimmedLine.startsWith('}') ||
+        trimmedLine.startsWith('dependency_overrides:')
+      ) {
+        parsingDependencies = false;
+      } else if (parsingDependencies && trimmedLine) {
+        const packageName = trimmedLine.split(':')[0].trim();
+        dependencies.push(packageName);
+      }
+    }
+
+    return dependencies;
+  };
+
+  const fetchAndParseDependencies = async (projectType) => {
     try {
-      const userRepoContents = await fetchRepositoryContents(owner, repo, 'pubspec.yaml');
+      let userRepoContents;
+      let projectRepoContents;
+  
+      if (projectType === "flutter") {
+        userRepoContents = await fetchRepositoryContents(owner, repo, 'pubspec.yaml');
+        projectRepoContents = await fetchRepositoryContents(projectUser, projectRepo, 'pubspec.yaml');
+      } else if (projectType === "react") {
+        userRepoContents = await fetchRepositoryContents(owner, repo, 'package.json');
+        projectRepoContents = await fetchRepositoryContents(projectUser, projectRepo, 'package.json');
+      } else if (projectType === "python") {
+        userRepoContents = await fetchRepositoryContents(owner, repo, 'requirements.txt');
+        projectRepoContents = await fetchRepositoryContents(projectUser, projectRepo, 'requirements.txt');
+      } else if (projectType === "nodejs") {
+        userRepoContents = await fetchRepositoryContents(owner, repo, 'package.json'); // Update the filename
+        projectRepoContents = await fetchRepositoryContents(projectUser, projectRepo, 'package.json'); // Update the filename
+      } else if (projectType === "colab") {
+        // You can add the relevant logic here for "colab"
+      } else {
+        console.error('Unsupported project type');
+        return; // Exit the function for unsupported types
+      }
+  
       const userPubspecContent = atob(userRepoContents.content);
-
-      const projectRepoContents = await fetchRepositoryContents(projectUser, projectRepo, 'pubspec.yaml');
       const projectPubspecContent = atob(projectRepoContents.content);
-
-      const userDependencies = parseFlutterProject(userPubspecContent);
-      const projectDependencies = parseFlutterProject(projectPubspecContent);
-
+  
+      let userDependencies;
+      let projectDependencies;
+  
+      if (projectType === "flutter") {
+        userDependencies = parseFlutterProject(userPubspecContent);
+        projectDependencies = parseFlutterProject(projectPubspecContent);
+      } else if (projectType === "react") {
+        userDependencies = parseReactProject(userPubspecContent);
+        projectDependencies = parseReactProject(projectPubspecContent);
+      } else {
+        console.error('Unsupported project type');
+        return; // Exit the function for unsupported types
+      }
+  
       setUserDependencies(userDependencies);
       setProjectDependencies(projectDependencies);
       calculateCosineSimilarity(userDependencies, projectDependencies);
-
     } catch (error) {
       console.error(error);
     }
   };
-
+  
   const calculateCosineSimilarity = (userDependencies, projectDependencies) => {
     const set1 = new Set(userDependencies);
     const set2 = new Set(projectDependencies);
@@ -185,13 +238,13 @@ function CompareRepo() {
     <h2 className="recommed-info-title">Compare GitHub Repositories</h2>
     <br></br>
       <div>
-        <select className="searchin">
+        <select className="searchin" onChange={(e) => setProjectType(e.target.value)}>
           <option>Select Type of Project</option>
-          <option>Python</option>
-          <option>React JS</option>
-          <option>Flutter</option>
-          <option>Node js</option>
-          <option>Colab</option>
+          <option value="python">Python</option>
+          <option value="react">React JS</option>
+          <option value="flutter">Flutter</option>
+          <option value="nodejs">Node js</option>
+          {/* <option value="colab">Colab</option> */}
         </select>
       </div>
       <div>
@@ -210,7 +263,9 @@ function CompareRepo() {
         <label><b>Project Repo:</b></label>
         <input className="searchin" type="text" value={projectRepo} onChange={(e) => setProjectRepo(e.target.value)} />
       </div>
-      <button className="search" onClick={fetchAndParseDependencies}>Fetch and Parse Dependencies</button>
+      {/* <button className="search" onClick={fetchAndParseDependencies(projectType)}>Fetch and Parse Dependencies</button> */}
+      <button className="search" onClick={() => fetchAndParseDependencies(projectType)}>Fetch and Parse Dependencies</button>
+
       <div>
         <h3>Flutter Dependencies of User:</h3>
         <ul>
