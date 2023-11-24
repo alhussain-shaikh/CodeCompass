@@ -30,7 +30,9 @@ const RepoRecommend = () => {
 
   const config = {
     headers: {
-      Authorization: `Bearer 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`,
+ 
+      Authorization: `Bearer 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`,
+
     },
   };
 
@@ -58,7 +60,7 @@ const RepoRecommend = () => {
     const allEvents = [];
     let page = 1;
 
-    while (allEvents.length < 60) {
+    while (allEvents.length < 61) {
       try {
         const response = await axios.get(
           `https://api.github.com/users/${username}/events?page=${page}`,
@@ -95,7 +97,8 @@ const RepoRecommend = () => {
           width: "300px",
           display: "flex",
           justifyContent: "center",
-          color: "#6131AD",
+          color: "#6131AD"
+
         }}
       />
       <Typography
@@ -125,12 +128,14 @@ const RepoRecommend = () => {
             return (
               <Card
                 key={index}
+
                 style={{
                   minWidth: 350,
                   margin: 10,
                   borderRadius: 15,
                   background: "#fff",
                 }}
+
               >
                 <CardContent>
                   <Typography variant="h5" component="div">
@@ -175,21 +180,12 @@ const RepoRecommend = () => {
           ) {
             uniqueInterested.push(contribution.payload.issue.title);
             return (
-              <Card
-                key={index}
-                style={{
-                  minWidth: 300,
-                  margin: 10,
-                  borderRadius: 15,
-                  background: "#fff",
-                }}
-              >
+
+              <Card key={index} style={{ minWidth: 300, margin: 10, borderRadius: 15, background: "#fff" }}>
                 <CardContent>
-                  <Typography
-                    variant="h5"
-                    component="div"
-                    style={{ color: "#7E0D80" }}
-                  >
+                  <Typography variant="h5" component="div" style={{ color: "#7E0D80" }}>
+
+
                     {contribution.repo.name}
                     {!uniqueRepos.includes(contribution.repo.name)
                       ? uniqueRepos.push(contribution.repo.name)
