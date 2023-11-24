@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import logo from '../assets/img/logo.svg';
 import navIcon1 from '../assets/img/nav-icon1.svg';
@@ -10,10 +11,29 @@ import {
   BrowserRouter as Router , Routes, Route
 } from "react-router-dom";
 
+const GITHUB_CLIENT_ID = "ac13de5979caa668c1f2";
+const gitHubRedirectURL = "http://localhost:4000/api/auth/github";
+const path = "/";
+
+
+
 export const NavBar = () => {
 
   const [activeLink, setActiveLink] = useState('home');
   const [scrolled, setScrolled] = useState(false);
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    (async function () {
+      const usr = await axios
+        .get(`http://localhost:4000/api/me`, {
+          withCredentials: true,
+        })
+        .then((res) => res.data);
+
+      setUser(usr);
+    })();
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -57,9 +77,17 @@ export const NavBar = () => {
                 <a href="#"><img src={navIcon2} alt="" /></a>
                 <a href="#"><img src={navIcon3} alt="" /></a>
               </div>
-              <HashLink to='#connect'>
-                <button className="vvd"><span>Let’s Connect</span></button>
-              </HashLink>
+
+              {!user ? (
+                <a href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${gitHubRedirectURL}?path=${path}&scope=user:email`}>
+                  <button className="vvd"><span>Login With GitHub</span></button>
+                </a>
+              ) : (
+                <button className="vvd"><span>Welcome {user.login}</span></button>
+              )}
+              {/* <a href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${gitHubRedirectURL}?path=${path}&scope=user:email`}>
+                <button className="vvd"><span>Login With GitHub</span></button>
+              </a> */}
             </span>
           </Navbar.Collapse>
         </Container>

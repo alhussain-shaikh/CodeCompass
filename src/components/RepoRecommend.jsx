@@ -30,7 +30,7 @@ const RepoRecommend = () => {
 
   const config = {
     headers: {
-      Authorization: `Bearer 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`,
+      Authorization: `Bearer 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`,
 
     },
   };
