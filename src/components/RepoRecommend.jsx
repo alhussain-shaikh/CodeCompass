@@ -30,7 +30,7 @@ const RepoRecommend = () => {
 
   const config = {
     headers: {
-      Authorization: `Bearer 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`,
+      Authorization: `Bearer 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`,
     },
   };
 
@@ -58,7 +58,7 @@ const RepoRecommend = () => {
     const allEvents = [];
     let page = 1;
 
-    while (allEvents.length < 30) {
+    while (allEvents.length < 60) {
       try {
         const response = await axios.get(
           `https://api.github.com/users/${username}/events?page=${page}`,
