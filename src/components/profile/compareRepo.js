@@ -158,7 +158,11 @@ function CompareRepo() {
       } else if (projectType === "react") {
         userDependencies = parseReactProject(userPubspecContent);
         projectDependencies = parseReactProject(projectPubspecContent);
-      } else {
+      }else if(projectType == "nodejs"){
+        userDependencies = parseReactProject(userPubspecContent);
+        projectDependencies = parseReactProject(projectPubspecContent);
+      } 
+      else {
         console.error('Unsupported project type');
         return; // Exit the function for unsupported types
       }
@@ -240,7 +244,7 @@ function CompareRepo() {
       <div>
         <select className="searchin" onChange={(e) => setProjectType(e.target.value)}>
           <option>Select Type of Project</option>
-          <option value="python">Python</option>
+          {/* <option value="python">Python</option> */}
           <option value="react">React JS</option>
           <option value="flutter">Flutter</option>
           <option value="nodejs">Node js</option>
@@ -267,7 +271,7 @@ function CompareRepo() {
       <button className="search" onClick={() => fetchAndParseDependencies(projectType)}>Fetch and Parse Dependencies</button>
 
       <div>
-        <h3>Flutter Dependencies of User:</h3>
+        <h3> Dependencies of User:</h3>
         <ul>
           {userDependencies.map((dependency, index) => (
             <li key={index}>{dependency}</li>
@@ -275,7 +279,7 @@ function CompareRepo() {
         </ul>
       </div>
       <div>
-        <h3>Flutter Dependencies of Project:</h3>
+        <h3> Dependencies of Project:</h3>
         <ul>
           {projectDependencies.map((dependency, index) => (
             <li key={index}>{dependency}</li>

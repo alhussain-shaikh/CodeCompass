@@ -21,7 +21,7 @@ const initialUserState = {
 };
 
 const initialGitHubTokenState = {
-  github_token: "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",
+  github_token: "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",
 };
 
 // Reducers

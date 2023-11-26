@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 
 export const Projects = () => {
 
-  const username = useSelector((state) => state.username);
+  const username = useSelector((state) => state.user.username);
 
   const projects = [
     {

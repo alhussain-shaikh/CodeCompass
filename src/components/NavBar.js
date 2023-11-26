@@ -17,7 +17,7 @@ import {
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const GITHUB_CLIENT_ID = "ac13de5979caa668c1f2";
-const gitHubRedirectURL = "http://localhost:4000/api/auth/github";
+const gitHubRedirectURL = "http://alhussain-shaikh.github.io/CodeCompass/api/auth/github";
 const path = "/";
 
 
@@ -39,7 +39,7 @@ export const NavBar = () => {
   useEffect(() => {
     (async function () {
       const usr = await axios
-        .get(`http://localhost:4000/api/me`, {
+        .get(`http://alhussain-shaikh.github.io/api/me`, {
           withCredentials: true,
         })
         .then((res) => res.data);

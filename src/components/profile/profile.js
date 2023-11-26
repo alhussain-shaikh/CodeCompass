@@ -6,7 +6,7 @@ function Profile(data){
   let username = data.name==null?data.login:data.name;
   let followers_count = data.followers;
   let following_count = data.following;
-  let puclic_repos = data.public_repos;
+  // let puclic_repos = data.public_repos;
   let bio = data.bio==null?"Not Given":data.bio;
   let avatar_url = data.avatar_url;
   let hireable = data.hireable==true?"Yes":"No";
@@ -17,7 +17,7 @@ function Profile(data){
   let create_date = data.created_at.substring(0,10);
   let repo_count = data.public_repos;
   let lastactive_date = data.updated_at.substring(0,10);
-  let events_url = data.events_url;
+  // let events_url = data.events_url;
 
   //console.log(blog);
   return (
