@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/CodeCompass/static/css/main.4750e14e.css",
-    "main.js": "/CodeCompass/static/js/main.06e020da.js",
+    "main.js": "/CodeCompass/static/js/main.a52747c4.js",
     "static/js/787.82b8d4af.chunk.js": "/CodeCompass/static/js/787.82b8d4af.chunk.js",
     "static/media/color-sharp.png": "/CodeCompass/static/media/color-sharp.bea361cfef80fefc2d1e.png",
     "static/media/color-sharp2.png": "/CodeCompass/static/media/color-sharp2.c87586c6c2f549cb4aa6.png",
@@ -29,11 +29,11 @@
     "static/media/arrow1.svg": "/CodeCompass/static/media/arrow1.0c89b5b635adf255c2822c630aaa6ccf.svg",
     "static/media/nav-icon2.svg": "/CodeCompass/static/media/nav-icon2.178f497aa17b70c42df2a1a8c926ed01.svg",
     "main.4750e14e.css.map": "/CodeCompass/static/css/main.4750e14e.css.map",
-    "main.06e020da.js.map": "/CodeCompass/static/js/main.06e020da.js.map",
+    "main.a52747c4.js.map": "/CodeCompass/static/js/main.a52747c4.js.map",
     "787.82b8d4af.chunk.js.map": "/CodeCompass/static/js/787.82b8d4af.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4750e14e.css",
-    "static/js/main.06e020da.js"
+    "static/js/main.a52747c4.js"
   ]
 }
