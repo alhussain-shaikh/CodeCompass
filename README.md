@@ -1,5 +1,6 @@
 
 # CodeCompass: Guiding you to the Right Repository
+![Recording 2023-11-26 204651](https://github.com/alhussain-shaikh/CodeCompass/assets/116242196/6426bba6-9e37-46d2-9d41-a03e7150b9fa)
 
 In the dynamic landscape of open-source development, the challenge of efficiently aligning developers with projects that resonate with their expertise persists. 
 This Repo introduces CodeCompass, a novel solution addressing this issue by leveraging the GitHub API to personalize project recommendations. 
