@@ -14,7 +14,7 @@ Navigating the vast landscape of open-source projects is a challenge for develop
 # User and Needs
 CodeCompass caters to a diverse range of developers, from novices to seasoned contributors. Through surveys and analysis, we understand their programming languages, areas of interest, preferred complexities, and community engagement levels. This enables personalized recommendations for a rich contribution experience.
 
-# Methordology
+# Methodology
 ### Data Collection
 CodeCompass utilizes the GitHub API for real-time project information, including metadata, languages used, commit history, and community engagement metrics. This ensures up-to-date and relevant data for accurate recommendations.
 
