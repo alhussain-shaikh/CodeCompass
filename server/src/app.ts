@@ -5,6 +5,7 @@ import { get } from "lodash";
 import cookieParser from "cookie-parser";
 import axios from "axios";
 import cors from "cors";
+import NodeCache from "node-cache";
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.use(
     credentials: true,
   })
 );
+
+const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
 export interface GitHubUser {
   login: string;
@@ -59,6 +62,13 @@ export interface GitHubUser {
 }
 
 async function getGitHubUser({ code }: { code: string }): Promise<GitHubUser> {
+  const cacheKey = `githubUser-${code}`;
+  const cachedUser = cache.get<GitHubUser>(cacheKey);
+
+  if (cachedUser) {
+    return cachedUser;
+  }
+
   const githubToken = await axios
     .post(
       `https://github.com/login/oauth/access_token?client_id=${GITHUB_CLIENT_ID}&client_secret=${GITHUB_CLIENT_SECRET}&code=${code}`
@@ -73,7 +83,7 @@ async function getGitHubUser({ code }: { code: string }): Promise<GitHubUser> {
 
   const accessToken = decoded.access_token;
 
-  return axios
+  const gitHubUser = await axios
     .get("https://api.github.com/user", {
       headers: { Authorization: `Bearer ${accessToken}` },
     })
@@ -82,6 +92,9 @@ async function getGitHubUser({ code }: { code: string }): Promise<GitHubUser> {
       console.error(`Error getting user from GitHub`);
       throw error;
     });
+
+  cache.set(cacheKey, gitHubUser);
+  return gitHubUser;
 }
 
 app.get("/api/auth/github", async (req: Request, res: Response) => {

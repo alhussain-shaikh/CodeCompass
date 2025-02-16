@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const cors = require("cors");
 const nodemailer = require("nodemailer");
+const NodeCache = require("node-cache");
 
 // server used to send send emails
 const app = express();
@@ -13,10 +14,10 @@ console.log(process.env.EMAIL_USER);
 console.log(process.env.EMAIL_PASS);
 
 const contactEmail = nodemailer.createTransport({
-  service: 'gmail',
+  service: 'SendGrid',
   auth: {
-    user: "hussain.al21@vit.edu",
-    pass: "bjpx eapf jrnm csri"
+    user: process.env.SENDGRID_USER,
+    pass: process.env.SENDGRID_PASS
   },
 });
 
@@ -27,6 +28,8 @@ contactEmail.verify((error) => {
     console.log("Ready to Send");
   }
 });
+
+const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
 router.post("/contact", (req, res) => {
   const name = req.body.firstName + req.body.lastName;
@@ -42,11 +45,21 @@ router.post("/contact", (req, res) => {
            <p>Phone: ${phone}</p>
            <p>Message: ${message}</p>`,
   };
+
+  const cacheKey = `${email}-${message}`;
+  const cachedResponse = cache.get(cacheKey);
+
+  if (cachedResponse) {
+    return res.json(cachedResponse);
+  }
+
   contactEmail.sendMail(mail, (error) => {
     if (error) {
       res.json(error);
     } else {
-      res.json({ code: 200, status: "Message Sent" });
+      const response = { code: 200, status: "Message Sent" };
+      cache.set(cacheKey, response);
+      res.json(response);
     }
   });
 });

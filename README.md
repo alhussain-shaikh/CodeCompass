@@ -1,4 +1,3 @@
-
 # CodeCompass: Guiding you to the Right Repository
 ![Recording 2023-11-26 204651](https://github.com/alhussain-shaikh/CodeCompass/assets/116242196/6426bba6-9e37-46d2-9d41-a03e7150b9fa)
 
@@ -137,3 +136,48 @@ Lemmatization is a crucial step in CodeCompass's recommendation system, transfor
   
 # Results 
 ![screencapture-localhost-3000-2023-11-25-17_26_28](https://github.com/alhussain-shaikh/CodeCompass/assets/116242196/95f8db78-90da-46ce-84bc-a0a62a84628a)
+
+# Performance Optimization
+
+## Techniques Used
+
+### 1. Efficient Email Service
+We optimized the email sending process by switching to a more efficient email service. This reduces the time taken to send emails and improves the overall performance of the application.
+
+### 2. Caching
+Implemented caching for frequently accessed data to reduce server load and improve response times. This includes caching GitHub user data and repository data.
+
+### 3. Reduced API Calls
+Optimized the GitHub user retrieval process by reducing the number of API calls. This minimizes the load on the GitHub API and speeds up the application.
+
+## Profiling the Application
+
+### Identifying Bottlenecks
+To identify performance bottlenecks, we used profiling tools such as `cProfile` for Python and Chrome DevTools for the front end. These tools helped us pinpoint slow functions and areas of the code that needed optimization.
+
+### Steps to Profile
+1. **Backend Profiling:**
+   - Use `cProfile` to profile the Flask application.
+   - Analyze the output to identify slow functions and optimize them.
+
+2. **Frontend Profiling:**
+   - Use Chrome DevTools to profile the React application.
+   - Identify slow components and optimize their rendering.
+
+## Common Performance Issues and Solutions
+
+### 1. Slow API Responses
+**Issue:** Slow responses from the GitHub API.
+**Solution:** Implemented caching to store frequently accessed data and reduce the number of API calls.
+
+### 2. High Server Load
+**Issue:** High server load due to frequent data retrieval.
+**Solution:** Implemented caching and optimized data retrieval processes to reduce server load.
+
+### 3. Slow Email Sending
+**Issue:** Slow email sending process.
+**Solution:** Switched to a more efficient email service to speed up the email sending process.
+
+### 4. Slow Page Load Times
+**Issue:** Slow page load times due to large data sets.
+**Solution:** Implemented lazy loading and optimized data fetching to improve page load times.

@@ -15,12 +15,13 @@ import {
 } from "react-router-dom";
 
 import LogoutIcon from '@mui/icons-material/Logout';
+import NodeCache from "node-cache";
 
 const GITHUB_CLIENT_ID = "ac13de5979caa668c1f2";
 const gitHubRedirectURL = "http://alhussain-shaikh.github.io/CodeCompass/api/auth/github";
 const path = "/";
 
-
+const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
 export const NavBar = () => {
 
@@ -38,15 +39,21 @@ export const NavBar = () => {
 
   useEffect(() => {
     (async function () {
-      const usr = await axios
-        .get(`http://alhussain-shaikh.github.io/api/me`, {
-          withCredentials: true,
-        })
-        .then((res) => res.data);
+      const cachedUser = cache.get("githubUser");
+      if (cachedUser) {
+        storeUpdate(cachedUser);
+        setUser(cachedUser);
+      } else {
+        const usr = await axios
+          .get(`http://alhussain-shaikh.github.io/api/me`, {
+            withCredentials: true,
+          })
+          .then((res) => res.data);
         storeUpdate(usr);
-      setUser(usr);
+        setUser(usr);
+        cache.set("githubUser", usr);
+      }
     })();
-   
   }, []);
 
   useEffect(() => {
@@ -70,6 +77,7 @@ export const NavBar = () => {
   const logoutUser = () => {
     dispatch(updateUsername(""))
     setUser("")
+    cache.del("githubUser");
   }
 
   return (

@@ -23,8 +23,25 @@ export const Contact = () => {
       })
   }
 
+  const validateForm = () => {
+    const { firstName, lastName, email, phone, message } = formDetails;
+    if (!firstName || !lastName || !email || !phone || !message) {
+      setStatus({ success: false, message: 'Please fill in all fields.' });
+      return false;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setStatus({ success: false, message: 'Please enter a valid email address.' });
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
     setButtonText("Sending...");
     let response = await fetch("http://localhost:5000/contact", {
       method: "POST",
