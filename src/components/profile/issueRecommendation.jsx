@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './issueRecommendation.css';
 import { useSelector } from 'react-redux';
+import NodeCache from 'node-cache';
+
+const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
 function GitHubIssueFetcher() {
   const [issueTypes, setIssueTypes] = useState('');
@@ -9,9 +12,8 @@ function GitHubIssueFetcher() {
   const [result, setResult] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const [toggle, setToggle] = useState(false);
-  const githubToken = useSelector((state)=>state.github.github_token)
-  
+  const githubToken = useSelector((state) => state.github.github_token);
+
   const fetchGitHubIssues = async () => {
     try {
       setLoading(true);
@@ -21,8 +23,17 @@ function GitHubIssueFetcher() {
       const headers = {
         Authorization: `token ${githubToken}`,
       };
-      const response = await axios.get(apiUrl, { headers });
 
+      const cacheKey = `${labels}-${numIssues}`;
+      const cachedIssues = cache.get(cacheKey);
+
+      if (cachedIssues) {
+        setResult(cachedIssues);
+        setLoading(false);
+        return;
+      }
+
+      const response = await axios.get(apiUrl, { headers });
       const data = response.data;
 
       if ('items' in data) {
@@ -31,24 +42,22 @@ function GitHubIssueFetcher() {
           const repoName = item.repository_url.split('/')[5];
 
           return (
-            
-              <div key={index} className='issueOutput'>
-                <div className='cardHeader'>
-                  <img className='profilePic' src={item.user.avatar_url} alt="" srcset="" />
-                  <a className='RepositoryURL' href={item.html_url} target='_blank'>Repo: {repoName}</a>
-                  <span className='owner'>Owner: {ownerName}</span>
-
-                </div>
-                <div className='issueDescription'>
-                  <p className='title'><b>Title: </b>{item.title}</p>
-                  <p >{item.body}</p>
-                </div>
+            <div key={index} className='issueOutput'>
+              <div className='cardHeader'>
+                <img className='profilePic' src={item.user.avatar_url} alt="" />
+                <a className='RepositoryURL' href={item.html_url} target='_blank' rel='noopener noreferrer'>Repo: {repoName}</a>
+                <span className='owner'>Owner: {ownerName}</span>
               </div>
-        
+              <div className='issueDescription'>
+                <p className='title'><b>Title: </b>{item.title}</p>
+                <p>{item.body}</p>
+              </div>
+            </div>
           );
         });
 
         setResult(issues);
+        cache.set(cacheKey, issues);
       } else {
         setResult(['No issues found for the given type.']);
       }
@@ -62,7 +71,7 @@ function GitHubIssueFetcher() {
 
   return (
     <div className="card">
-      <h1>Tag Based Issue Reccomendation</h1>
+      <h1>Tag Based Issue Recommendation</h1>
       <div className='inputLabel'>
         Enter the types of issues you want to work on (e.g., bug, enhancement):
         <input
@@ -80,10 +89,9 @@ function GitHubIssueFetcher() {
         />
       </div>
       <button className='fetch' onClick={fetchGitHubIssues}>Fetch Issues</button>
-     
-        {loading ? <p className="loading">Loading...</p> :  <div className='outputContainer'> {result} </div>}
-      
+      {loading ? <p className="loading">Loading...</p> : <div className='outputContainer'>{result}</div>}
     </div>
   );
 }
+
 export default GitHubIssueFetcher;
